@@ -2,7 +2,23 @@ body{
   margin: 0;
 }
 
-#zoneArea{
+#gameArea{
+  position: relative;
   background-color: black;
   height: 100vh;
+}
+
+#gameArea .paddle:nth-of-type(1){
+  left: 0;
+}
+
+#gameArea .paddle:nth-of-type(2){
+  right: 0;
+}
+
+.paddle{
+  width: 20px;
+  height: 200px;
+  background-color: white;
+  position: absolute;
 }
