@@ -1,6 +1,7 @@
 const gameArea = document.getElementById('gameArea')
 const messageElement = document.getElementById('message')
 const instructionsElement = document.getElementById('instructions')
+gameStatus = 'PAUSE'
 let ball;
 
 class Paddle{
@@ -70,7 +71,7 @@ class Ball{
     gameArea.appendChild(this.element)
     this.resetPosition()
     this.move()
-    messageElement.classList.toggle('hidden',true)
+    messageElement.classList='hidden'
     instructionsElement.classList.toggle('hidden',true)
   }
 
@@ -123,6 +124,7 @@ class Ball{
 class Board{
   p1Score = 0
   p2Score = 0
+  maxScore = 2;
 
   constructor(){
     this.element = document.createElement('p')
@@ -144,6 +146,25 @@ class Board{
     p2.resetPosition()
     messageElement.textContent = 'Press "spacebar" to continue'
     messageElement.classList.toggle('hidden',false)
+    this.gameStatus = 'PAUSE'
+    if(this.p1Score >= this.maxScore){
+      this.win(1)
+    } else if(this.p2Score >= this.maxScore){
+      this.win(2)
+    }
+  }
+
+  win(p){
+    messageElement.textContent = 'Player '+p+' wins!'
+    messageElement.classList.toggle('twinkle',true)
+    gameStatus = 'END'
+  }
+
+  reset(){
+    this.p1Score = 0;
+    this.p2Score = 0;
+    this.updateText();
+    messageElement.classList.toggle('twinkle',false)
   }
 }
 
@@ -162,7 +183,11 @@ document.addEventListener('keydown', (e) => {
       p2.goDown();
       break
     case " ":
+      if(gameStatus==='END'){
+        board.reset()
+      }
       if(!ball) ball = new Ball()
+      gameStatus = 'PLAY'
       break
   }
 })

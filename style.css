@@ -65,7 +65,20 @@ kbd{
   aspect-ratio: 1;
 }
 
+.twinkle{
+  animation-name: twinkle;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+}
+
 @font-face {
   font-family: 'llpixel';
   src: url(./LLPIXEL3.ttf);
+}
+
+@keyframes twinkle {
+  0% {opacity: 100%}
+  49.99% {opacity: 100%}
+  50% {opacity: 0%}
+  99.99% {opacity: 0%}
 }
