@@ -60,8 +60,8 @@ class Paddle{
 class Ball{
   x;
   y;
-  dx = -10;
-  dy = -10;
+  dx = -20;
+  dy = 0 ;
   width = 30;
   movement;
 
@@ -90,12 +90,14 @@ class Ball{
         if(this.x < 0+p1.width &&
           this.y + this.width/2 > p1.y &&
           this.y + this.width/2 < p1.y + p1.height){
+          this.dy += this.getYVariation(p1)
           this.dx = this.dx *-1
         }
 
         if(this.x + this.width > document.body.clientWidth-p2.width &&
           this.y + this.width/2 > p2.y &&
           this.y + this.width/2 < p2.y + p2.height){
+          this.dy += this.getYVariation(p2)
           this.dx = this.dx *-1
         }
 
@@ -118,6 +120,11 @@ class Ball{
     clearInterval(this.movement)
     gameArea.removeChild(this.element)
     ball = undefined
+  }
+
+  getYVariation(p){
+    const difference = ((this.y + this.width/2) - (p.y+ p.height/2))
+    return difference/10
   }
 }
 
