@@ -47,6 +47,26 @@ class Paddle{
   }
 }
 
+class Ball{
+  x;
+  y;
+  width = 30;
+
+  constructor(){
+    this.element = document.createElement('div')
+    this.element.classList = 'ball'
+    gameArea.appendChild(this.element)
+    this.resetPosition()
+  }
+
+  resetPosition(){
+    this.x = document.body.clientWidth/2
+    this.element.style.left = this.x+'px'
+    this.y = document.body.clientHeight/2 - this.width/2
+    this.element.style.top = this.y+'px'
+  }
+}
+
 document.addEventListener('keydown', (e) => {
   console.log(e)
   switch(e.key){
@@ -82,3 +102,4 @@ document.addEventListener('keyup', (e) => {
 
 const p1 = new Paddle()
 const p2 = new Paddle()
+const ball = new Ball()

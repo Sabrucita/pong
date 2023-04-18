@@ -22,3 +22,11 @@ body{
   background-color: white;
   position: absolute;
 }
+
+.ball{
+  position: absolute;
+  background-color: white;
+  width: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
