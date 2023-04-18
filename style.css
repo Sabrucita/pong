@@ -22,7 +22,7 @@ body{
 
 .paddle{
   width: 20px;
-  height: 200px;
+  height: 250px;
   background-color: white;
   position: absolute;
 }
@@ -30,7 +30,7 @@ body{
 .ball{
   position: absolute;
   background-color: white;
-  width: 30px;
+  width: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
 }
@@ -55,13 +55,13 @@ body{
   position: absolute;
   width: 100%;
   bottom: 0;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 kbd{
   background-color: rgba(255, 255, 255, 0.312);
   display: inline-block;
-  width: 30px;
+  width: 20px;
   aspect-ratio: 1;
 }
 

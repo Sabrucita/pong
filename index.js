@@ -9,7 +9,7 @@ class Paddle{
   y=0;
   velocity= 10;
   movement;
-  height = 200;
+  height = 250;
   width = 20
 
   constructor(){
@@ -52,8 +52,36 @@ class Paddle{
   }
 
   resetPosition(){
+    this.freeze()
     this.y = document.body.clientHeight/2 - this.height/2
     this.element.style.top = this.y+'px'
+  }
+
+  toggleCPU(){
+    if(this.cpu){
+      clearInterval(this.cpu)
+      clearInterval(this.movement)
+      this.movement = undefined
+      this.cpu = undefined
+    } else {
+      this.cpu = setInterval(()=>{
+        if(!ball) return
+        if(ball.getCenter() < this.y + this.height/3 &&
+        ball.getCenter() > this.y + this.height/3*2){
+          this.freeze()
+        }
+        else if(ball.getCenter() < this.getCenter()){
+          this.goUp()
+        }
+        else if(ball.getCenter() > this.getCenter()){
+          this.goDown()
+        }
+      },20)
+    }
+  }
+
+  getCenter(){
+    return this.y + this.height/2
   }
 }
 
@@ -62,8 +90,9 @@ class Ball{
   y;
   dx = -20;
   dy = 0 ;
-  width = 30;
+  width = 40;
   movement;
+  cpu;
 
   constructor(){
     this.element = document.createElement('div')
@@ -123,8 +152,12 @@ class Ball{
   }
 
   getYVariation(p){
-    const difference = ((this.y + this.width/2) - (p.y+ p.height/2))
+    const difference = this.getCenter() - (p.getCenter())
     return difference/10
+  }
+
+  getCenter(){
+    return this.y + this.width/2
   }
 }
 
@@ -188,6 +221,12 @@ document.addEventListener('keydown', (e) => {
       break
     case 'ArrowDown':
       p2.goDown();
+      break
+    case '1':
+      p1.toggleCPU();
+      break
+    case '2':
+      p2.toggleCPU();
       break
     case " ":
       if(gameStatus==='END'){
